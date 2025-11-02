@@ -8,7 +8,7 @@ from typing import List
 import os, pickle
 
 
-MODEL_DIR = Path("trainedModels")
+MODEL_DIR = Path("../trainedModels")
 HOST, PORT = "0.0.0.0", 8000
 
 

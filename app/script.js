@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const inputs = Array.from(formData.values()).join(",");
 
         try {
-            const response = await fetch(`http://localhost:8000/predict?inputs=${inputs}`);
+            const response = await fetch(`https://diabetesindicator.onrender.com/predict?inputs=${inputs}`);
             if (!response.ok) throw new Error("API connection failed");
 
             const data = await response.json();
