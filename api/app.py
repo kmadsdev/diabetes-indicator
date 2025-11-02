@@ -3,6 +3,7 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from joblib import load
+import numpy as np
 
 
 MODEL_DIR = Path("trainedModels")
@@ -51,6 +52,7 @@ def home():
 
 @app.get("/predict")
 def predict(inputs: str):
+    import numpy as np
     global model, current_model_path
 
     latest_path = get_latest_model_path()
@@ -60,10 +62,14 @@ def predict(inputs: str):
         current_model_path = latest_path
 
     X = [[float(x) if '.' in x else int(x) for x in inputs.split(',')]]
-    y = model.predict(X)[0]
+
+    proba = model.predict_proba(X)[0]
+    y = int(np.argmax(proba))
+    confidence = round(proba[y] * 100, 2)
 
     return {
-        "prediction": int(y),
+        "prediction": y,
+        "confidence": confidence,
         "model": current_model_path.name
     }
 
