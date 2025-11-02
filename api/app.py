@@ -1,13 +1,56 @@
 from datetime import datetime
 from pathlib import Path
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from joblib import load
 import numpy as np
+from typing import List
+import os, pickle
 
 
 MODEL_DIR = Path("trainedModels")
 HOST, PORT = "0.0.0.0", 8000
+
+
+def validate_inputs(values: List[float]):
+    fields = [
+        ("HighBP", int, [0, 1]),
+        ("HighChol", int, [0, 1]),
+        ("CholCheck", int, [0, 1]),
+        ("BMI", float, (0, 1000)),
+        ("Smoker", int, [0, 1]),
+        ("Stroke", int, [0, 1]),
+        ("HeartDiseaseorAttack", int, [0, 1]),
+        ("PhysActivity", int, [0, 1]),
+        ("Fruits", int, [0, 1]),
+        ("Veggies", int, [0, 1]),
+        ("HvyAlcoholConsump", int, [0, 1]),
+        ("AnyHealthCare", int, [0, 1]),
+        ("NoDocbcCost", int, [0, 1]),
+        ("GenHlth", int, (1, 5)),
+        ("DiffWalk", int, [0, 1]),
+        ("Sex", int, [0, 1]),
+        ("Age", int, (0, 13))
+    ]
+
+    if len(values) != len(fields):
+        raise HTTPException(status_code=400, detail=f"Expected {len(fields)} inputs, got {len(values)}.")
+
+    for i, (name, typ, rule) in enumerate(fields):
+        val = values[i]
+        try:
+            val = typ(val)
+        except:
+            raise HTTPException(status_code=400, detail=f"{name} must be of type {typ.__name__}.")
+
+        if isinstance(rule, list):
+            if val not in rule:
+                raise HTTPException(status_code=400, detail=f"{name} must be one of {rule}.")
+        elif isinstance(rule, tuple):
+            if not (rule[0] <= val <= rule[1]):
+                raise HTTPException(status_code=400, detail=f"{name} must be between {rule[0]} and {rule[1]}.")
+
+    return values
 
 
 def get_latest_model_path():
@@ -61,8 +104,12 @@ def predict(inputs: str):
         model = load_model(latest_path)
         current_model_path = latest_path
 
-    X = [[float(x) if '.' in x else int(x) for x in inputs.split(',')]]
+    try:
+        X = [float(x) if '.' in x else int(x) for x in inputs.split(',')]
+    except ValueError:
+        raise HTTPException(status_code=400, detail="All inputs must be numeric.")
 
+    X = [validate_inputs(X)]
     proba = model.predict_proba(X)[0]
     y = int(np.argmax(proba))
     confidence = round(proba[y] * 100, 2)

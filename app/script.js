@@ -65,10 +65,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const data = await response.json();
             resultDiv.textContent = data.prediction === 1
-                ? `You may have diabetes (${data.confidence}% confidence). Please see a doctor.`
-                : `You likely don't have diabetes (${data.confidence}% confidence).`;
+                ? `⚠️ You may have diabetes (${data.confidence}% confidence). Please see a doctor.`
+                : `✅ You likely don't have diabetes (${data.confidence}% confidence).`;
         } catch (err) {
-        resultDiv.textContent = "Error connecting to API.";
+            resultDiv.textContent = "Error connecting to API.";
+            resultDiv.style.color = "#ff0000"
         }
     });
 });
