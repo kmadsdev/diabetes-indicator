@@ -9,9 +9,6 @@ Diabetes Indicator is a survey website that asks you 17 questions to determine w
     |  ⊢ app.py (running on render, fastapi + uvicorn)
     |  ⌞ requirements.txt (dependencies to deploy the api)
     |
-    ⊢ dataset/
-    |  ⌞ ... (source datasets used for analysis)  
-    |
     ⊢ docs/
     |  ⊢ index.html (main page)
     |  ⊢ style.css (styles for desktop)
