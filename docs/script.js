@@ -51,51 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
         el.addEventListener("input", calculateBMI)
     );
 
-    function validateForm() {
-        let valid = true;
-        let firstInvalid = null;
-
-        form.querySelectorAll("input[type='hidden']").forEach(input => {
-            if (!input.value) {
-                valid = false;
-                if (!firstInvalid) firstInvalid = input;
-                input.closest(".question").style.border = "1px solid red";
-            } else {
-                input.closest(".question").style.border = "none";
-            }
-        });
-
-        [weightInput, heightInput].forEach(input => {
-            if (!input.value || parseFloat(input.value) <= 0) {
-                valid = false;
-                if (!firstInvalid) firstInvalid = input;
-                input.style.border = "1px solid red";
-            } else {
-                input.style.border = "";
-            }
-        });
-
-        form.querySelectorAll("select").forEach(select => {
-            if (!select.value) {
-                valid = false;
-                if (!firstInvalid) firstInvalid = select;
-                select.style.border = "1px solid red";
-            } else {
-                select.style.border = "";
-            }
-        });
-
-        if (!valid) {
-            alert("⚠️ Please complete all questions before submitting.");
-            if (firstInvalid) firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-        return valid;
-    }
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
-        if (!validateForm()) return;
 
         const formData = new FormData(form);
         const inputs = Array.from(formData.values()).join(",");
@@ -105,13 +63,15 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!response.ok) throw new Error("API connection failed");
 
             const data = await response.json();
-            resultDiv.style.color = data.prediction === 1 ? "#ffff00" : "#00ff00";
+            resultDiv.style.color = data.prediction === 1 
+                ? "#ffff00" 
+                : "#00ff00";
             resultDiv.textContent = data.prediction === 1
                 ? `⚠️ You may have diabetes (${data.confidence}% confidence). Please see a doctor.`
                 : `✅ You likely don't have diabetes (${data.confidence}% confidence).`;
         } catch (err) {
-            resultDiv.textContent = "Error connecting to API.";
             resultDiv.style.color = "#ff0000";
+            resultDiv.textContent = "Error connecting to API.";
         }
     });
 });
