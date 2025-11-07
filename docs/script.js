@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const bmiResult = document.getElementById("bmiResult");
     const resultDiv = document.getElementById("result");
 
+    
     document.querySelectorAll(".buttons").forEach(group => {
         const buttons = group.querySelectorAll("button");
         const hiddenInput = group.nextElementSibling;
@@ -19,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
+
 
     function calculateBMI() {
         const weight = parseFloat(weightInput.value);
@@ -67,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ? "#ffff00" 
                 : "#00ff00";
             resultDiv.textContent = data.prediction === 1
-                ? `⚠️ You may have diabetes (${data.confidence}% confidence). Please see a doctor.`
+                ? `⚠️ You may have diabetes (${data.confidence}% confidence). You might wanna see a doctor.`
                 : `✅ You likely don't have diabetes (${data.confidence}% confidence).`;
         } catch (err) {
             resultDiv.style.color = "#ff0000";

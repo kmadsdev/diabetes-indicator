@@ -1,10 +1,9 @@
-/* mobile.css */
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
-    overflow: hidden; /* prevent second scrollbar */
+    overflow: hidden;
     background-color: #111;
     color: #eee;
     font-family: Arial, sans-serif;
@@ -23,8 +22,8 @@ html, body {
     box-shadow: none;
     display: flex;
     flex-direction: column;
-    overflow-y: auto; /* only one scroll area */
-    -webkit-overflow-scrolling: touch; /* smooth on mobile */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 h1 {
@@ -45,7 +44,6 @@ small {
     font-size: 0.9em;
 }
 
-/* 50/50 buttons */
 .buttons {
     display: flex;
     justify-content: space-between;
@@ -66,7 +64,6 @@ small {
     background-color: #007bff;
 }
 
-/* Inputs and dropdowns */
 .dropdown,
 input[type="number"],
 .slider {
@@ -90,7 +87,6 @@ input[type="number"],
     font-size: 0.9em;
 }
 
-/* Submit button */
 .submit-btn {
     font-size: 1.3em;
     padding: 16px;

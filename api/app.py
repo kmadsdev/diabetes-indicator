@@ -4,6 +4,8 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from joblib import load
 from typing import List
+import uvicorn
+import numpy as np
 
 
 MODEL_DIR = Path("../trainedModels")
@@ -93,7 +95,6 @@ def home():
 
 @app.get("/predict")
 def predict(inputs: str):
-    import numpy as np
     global model, current_model_path
 
     latest_path = get_latest_model_path()
@@ -120,5 +121,4 @@ def predict(inputs: str):
 
 
 if __name__ == "__main__":
-    import uvicorn
     uvicorn.run(app, host=HOST, port=PORT)
