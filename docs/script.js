@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .join(",");
 
         try {
-            const response = await fetch(`https:/diabetes-indicator-api.vercel.app/api/predict?inputs=${inputs}`);
+            const response = await fetch(`https://diabetes-indicator-api.vercel.app/predict?inputs=${inputs}`);
             if (!response.ok) throw new Error("API connection failed");
 
             const data = await response.json();
