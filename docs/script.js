@@ -71,10 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             resultDiv.style.color = data.prediction === 1 ? "#ffff00" : "#00ff00";
             resultDiv.textContent = data.prediction === 1
-                ? `⚠️ You may have diabetes (${data.confidence}% confidence). You might wanna see a doctor.`
-                : `✅ You likely don't have diabetes (${data.confidence}% confidence).`;
-
-            resultDiv.textContent += ` (Model: ${data.model})`;
+                ? `⚠️ You may have diabetes (${data.accuracy}% confidence). You might wanna see a doctor.`
+                : `✅ You likely don't have diabetes (${data.accuracy}% confidence).`;
 
         } catch (err) {
             resultDiv.style.color = "#ff0000";
