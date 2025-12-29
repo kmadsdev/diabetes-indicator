@@ -23,6 +23,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
+    // Update placeholders based on metric type
+    function updatePlaceholders() {
+        const type = bmiType.value;
+        if (type === "metric") {
+            weightInput.placeholder = "kg";
+            heightInput.placeholder = "cm";
+        } else {
+            weightInput.placeholder = "lbs";
+            heightInput.placeholder = "ft";
+        }
+    }
+
     // BMI calculation
     function calculateBMI() {
         const weight = parseFloat(weightInput.value);
@@ -41,16 +53,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const category =
             bmi < 18.5 ? "Underweight" :
-            bmi < 25 ? "Normal weight" :
-            bmi < 30 ? "Overweight" : "Obese";
+            bmi < 25 ?   "Normal Weight" :
+            bmi < 30 ?   "Overweight" : 
+            bmi < 35 ?   "Obesity Class I" : 
+            bmi < 40 ?   "Obesity Class II" : 
+            "Severe Obesity";
 
         bmiHidden.value = bmi.toFixed(1);
         bmiResult.textContent = `Your BMI is: ${bmi.toFixed(1)} — Category: ${category}`;
     }
 
-    [weightInput, heightInput, bmiType].forEach(el =>
+    [weightInput, heightInput].forEach(el =>
         el.addEventListener("input", calculateBMI)
     );
+
+    bmiType.addEventListener("change", () => {
+        updatePlaceholders();
+        calculateBMI();
+    });
+
+    // Initialize placeholders
+    updatePlaceholders();
 
     // Form submission
     form.addEventListener("submit", async (e) => {
@@ -63,18 +86,25 @@ document.addEventListener("DOMContentLoaded", () => {
             .map(v => v.includes('.') ? parseFloat(v) : parseInt(v))
             .join(",");
 
+        // Show loading state
+        resultDiv.className = "result loading";
+        resultDiv.innerHTML = '<span class="loading-dots">Analyzing your health data</span>';
+
         try {
-            const response = await fetch(`https://diabetes-indicator-api.vercel.app/predict?inputs=${inputs}`);
+            const response = await fetch(`https://api.kmads.dev/diabetes-indicator/predict?inputs=${inputs}`);
             if (!response.ok) throw new Error("API connection failed");
 
             const data = await response.json();
 
+            // Remove loading state
+            resultDiv.className = "result";
             resultDiv.style.color = data.prediction === 1 ? "#ffff00" : "#00ff00";
             resultDiv.textContent = data.prediction === 1
                 ? `⚠️ You may have diabetes (${data.accuracy}% confidence). You might wanna see a doctor.`
                 : `✅ You likely don't have diabetes (${data.accuracy}% confidence).`;
 
         } catch (err) {
+            resultDiv.className = "result";
             resultDiv.style.color = "#ff0000";
             resultDiv.textContent = "Error connecting to API.";
             console.error(err);
