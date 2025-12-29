@@ -15,7 +15,7 @@ Diabetes Indicator is a survey website that asks you 17 questions to determine w
 - **Dark Theme** - Modern dark UI design
 
 ## Demo
-![Demo](https://raw.githubusercontent.com/kmadsdev/diabetes-indicator/main/docs/assets/media/demo-2025-11-17.gif)
+![Demo](assets/media/demo-2025-11-17.gif)
 
 ## Project Structure
 ```
