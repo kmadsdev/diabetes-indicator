@@ -1,0 +1,257 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #111;
+    color: #eee;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 100%;
+    background: #1c1c1c;
+    border-radius: 0;
+    padding: 16px;
+    box-sizing: border-box;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+h1 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.hero {
+    width: 100%;
+    margin: 0 0 30px 0;
+    padding: 0;
+}
+
+.hero-text {
+    text-align: center;
+    font-size: 0.95em;
+    padding: 0 5px;
+}
+
+.disclaimer-label {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    margin: 0;
+}
+
+.disclaimer-title {
+    margin: 0 0 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.disclaimer-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.disclaimer-message {
+    font-size: 0.85em;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.form {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.question {
+    margin-bottom: 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.question p {
+    font-size: 1em;
+    text-align: center;
+}
+
+small {
+    font-size: 0.85em;
+    text-align: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    gap: 12px;
+}
+
+.buttons button {
+    flex: 1;
+    max-width: 45%;
+    font-size: 1.1em;
+    padding: 14px 10px;
+    border-radius: 8px;
+    background-color: #222;
+    border: 1px solid #444;
+}
+
+.buttons button.active {
+    background-color: #007bff;
+}
+
+.dropdown,
+input[type="number"],
+.slider {
+    font-size: 1em;
+    padding: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#bmiQuestions {
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#bmiQuestions p {
+    text-align: left;
+    margin: 10px 0 5px 0;
+}
+
+#bmiType,
+#weightInput,
+#heightInput {
+    width: 100%;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.slider-labels {
+    display: flex;
+    font-size: 0.75em;
+    padding: 0 5px;
+}
+
+.slider-labels span {
+    flex: 1;
+}
+
+.slider-labels span:nth-child(1),
+.slider-labels span:nth-child(2) {
+    text-align: left;
+}
+
+.slider-labels span:nth-child(3) {
+    text-align: center;
+}
+
+.slider-labels span:nth-child(4),
+.slider-labels span:nth-child(5) {
+    text-align: right;
+}
+
+.submit-btn {
+    font-size: 1.2em;
+    padding: 16px;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.result {
+    font-size: 1.1em;
+    padding: 20px 10px;
+    text-align: center;
+}
+
+.result.loading {
+    color: #007bff;
+}
+
+.loading-dots::after {
+    content: '.';
+    animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+    0%, 25% {
+        content: '.';
+    }
+    26%, 50% {
+        content: '..';
+    }
+    51%, 75% {
+        content: '...';
+    }
+    76%, 100% {
+        content: '..';
+    }
+}
+
+.bmi-text {
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* Footer mobile styles */
+.footer {
+    margin: 30px 0 20px 0;
+    padding: 20px 10px;
+    text-align: center;
+    border-top: 1px solid #333;
+}
+
+.footer-copyright {
+    font-size: 0.85em;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9em;
+    padding: 8px 16px;
+    background: #252525;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.footer-link:hover {
+    background: #333;
+}
+
+.footer-link img {
+    width: 18px;
+    height: 18px;
+}
+
+.footer-link span {
+    color: var(--primary-color);
+}
