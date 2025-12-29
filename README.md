@@ -1,5 +1,6 @@
 # Diabetes Indicator 
-## Available at: [https://kmads.dev/diabetes-indicator/](https://kmads.dev/diabetes-indicator/)
+**Available at: [https://kmads.dev/diabetes-indicator/](https://kmads.dev/diabetes-indicator/)** <br>
+**Backend: [https://source.kmads.dev/diabetes-indicator-backend/](https://source.kmads.dev/diabetes-indicator-backend/)**
 
 Diabetes Indicator is a survey website that asks you 17 questions to determine whether you may have diabetes.
 
@@ -11,17 +12,11 @@ Diabetes Indicator is a survey website that asks you 17 questions to determine w
 ### Project Structure:
 ```
     diabetes-indicator
-    ⊢ docs/
-    |  ⊢ index.html (main page)
-    |  ⊢ style.css (styles for desktop)
-    |  ⊢ mobile.css (styles for mobile phones)
-    |  ⌞ script.js (script to connect with the backend)
-    |
-    ⊢ predictionModel/
-    |  ⌞ ml.ipynb (Main machine learning training file)
-    |
-    ⊢ trainedModels/
-    |  ⌞ ... (Saved models with timestamps)
-    |
-    ⌞ LICENSE, README.md, .gitignore, ...
+    ⊢ index.html (main page)
+    ⊢ style.css (styles for desktop)
+    ⊢ mobile.css (styles for mobile phones)
+    ⊢ script.js (API Gateway)
+    ⊢ assets/ (Images, icons, demo videos, ...)
+    |  ⊢ banners/, icons/, media/, infra/ ...
+    ⌞ README.md
 ```
